@@ -1,0 +1,73 @@
+<DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown from 14th December</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        #dayDisplay {
+            font-size: 2rem;
+            margin: 20px 0;
+            color: #00796b;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Countdown Starting from 14th December</h1>
+    <div id="dayDisplay">Loading...</div>
+
+    <!-- Link to View Countdown -->
+    <div id="countdown-link" style="margin-top: 20px;">
+       
+
+    <script>
+        // Set the start date to 14th December 2024
+        const startDate = new Date("December 14, 2024 00:00:00 GMT"); // Make sure it's in GMT
+
+        // Function to calculate the current day number and full date (month, day, year)
+        function getCurrentDay() {
+            const currentDate = new Date(); // Get current date and time
+            const timeDiff = currentDate - startDate;  // Difference in milliseconds
+            const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));  // Convert milliseconds to days
+            const currentDay = 14 + daysDiff;  // Start from day 14
+            return { currentDay, currentDate };
+        }
+
+        // Function to update the day display with the full date
+        function updateDayDisplay() {
+            const dayDisplay = document.getElementById("dayDisplay");
+            const { currentDay, currentDate } = getCurrentDay();
+
+            // If the countdown exceeds 100, stop and show completed
+            if (currentDay > 100) {
+                dayDisplay.textContent = "Countdown completed!";
+                return;
+            }
+
+            // Format the full date (Month Day, Year)
+            const month = currentDate.toLocaleString('default', { month: 'long' });
+            const day = currentDate.getDate();
+            const year = currentDate.getFullYear();
+
+            // Update the display with the current day and full date
+            dayDisplay.textContent = `Day ${currentDay}: ${month} ${day}, ${year}`;
+        }
+
+        // Initial day display update
+        updateDayDisplay();
+        
+        // Update the display every day at midnight (every 24 hours)
+        setInterval(updateDayDisplay, 24 * 60 * 60 * 1000); // Update every 24 hours
+    </script>
+</body>
+</html>
